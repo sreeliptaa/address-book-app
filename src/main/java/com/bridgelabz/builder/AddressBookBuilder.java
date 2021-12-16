@@ -2,7 +2,9 @@ package com.bridgelabz.builder;
 
 import com.bridgelabz.dto.AddressBookDto;
 import com.bridgelabz.entity.AddressBook;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +15,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AddressBookBuilder {
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     /**
      * Purpose : This method is created to copy the properties of simple POJO to @Entity class
      *

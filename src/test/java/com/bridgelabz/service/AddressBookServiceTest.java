@@ -3,7 +3,7 @@ package com.bridgelabz.service;
 import com.bridgelabz.builder.AddressBookBuilder;
 import com.bridgelabz.dto.AddressBookDto;
 import com.bridgelabz.entity.AddressBook;
-import com.bridgelabz.exception.CustomException;
+import com.bridgelabz.exception.AddressBookCustomException;
 import com.bridgelabz.repository.AddressRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -194,6 +194,6 @@ public class AddressBookServiceTest {
         addressBookDto.setPinCode("765432");
 
         when(addressRepository.findById(id)).thenReturn(Optional.empty());
-        assertThrows(CustomException.class, () -> addressBookService.updateAddress(id, addressBookDto));
+        assertThrows(AddressBookCustomException.class, () -> addressBookService.updateAddress(id, addressBookDto));
     }
 }

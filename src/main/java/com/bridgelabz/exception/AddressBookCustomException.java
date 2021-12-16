@@ -6,8 +6,8 @@ package com.bridgelabz.exception;
  * @author SREELIPTA
  * @since : 10-12-2021
  */
-public class CustomException extends RuntimeException {
-    public CustomException(String message) {
+public class AddressBookCustomException extends RuntimeException {
+    public AddressBookCustomException(String message) {
         super(message);
     }
 }
