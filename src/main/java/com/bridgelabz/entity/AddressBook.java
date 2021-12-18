@@ -40,6 +40,4 @@ public class AddressBook {
     @Column(name = "PIN")
     private String pinCode;
 
-
-
 }

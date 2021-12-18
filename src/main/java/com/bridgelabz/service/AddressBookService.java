@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class AddressBookService {
+public class AddressBookService implements IAddressBookService {
     private static final String ADDRESS_ADDED_SUCCESSFULLY = "Address added successfully";
-    private static final String INVALID_ID = "Invalid id";
+    private static final String INVALID_ID = "Invalid Address Book id";
     private static final String ADDRESS_DELETED_SUCCESSFULLY = "Address deleted successfully";
     private static final String ADDRESS_UPDATED_SUCCESSFULLY = "Address updated successfully";
     @Autowired
@@ -37,6 +37,7 @@ public class AddressBookService {
      *
      * @return the list of all adress book records
      */
+    @Override
     public List<AddressBookDto> getListOfAllAddress() {
         return addressRepository
                 .findAll()
@@ -51,6 +52,7 @@ public class AddressBookService {
      * @param addressBookDto :is used to add data from client
      * @return address book records are created
      */
+    @Override
     public String addAddress(AddressBookDto addressBookDto) {
         AddressBook addressBook = modelMapper.map(addressBookDto, AddressBook.class);
         addressRepository.save(addressBook);
@@ -64,8 +66,9 @@ public class AddressBookService {
      * @param addressBookDto getting data from client
      * @return updated records of the adress book
      */
+    @Override
     public String updateAddress(int id, AddressBookDto addressBookDto) throws AddressBookCustomException {
-        AddressBook addressBook = findAtmEntityById(id);
+        AddressBook addressBook = findAddressById(id);
         addressBook = addressBookBuilder.buildAddressBook(addressBookDto, addressBook);
         addressRepository.save(addressBook);
         return ADDRESS_UPDATED_SUCCESSFULLY;
@@ -77,8 +80,9 @@ public class AddressBookService {
      * @param id unique id of the adress book records
      * @return the status of the record which deleted or not
      */
+    @Override
     public String deleteAddress(int id) throws AddressBookCustomException {
-        AddressBook addressBook = findAtmEntityById(id);
+        AddressBook addressBook = findAddressById(id);
         addressRepository.delete(addressBook);
         return ADDRESS_DELETED_SUCCESSFULLY;
     }
@@ -88,7 +92,8 @@ public class AddressBookService {
      * @param id unique id of the records
      * @return the status of the adress book records
      */
-    private AddressBook findAtmEntityById(int id) {
+    @Override
+    public AddressBook findAddressById(int id) {
         return addressRepository.findById(id).orElseThrow(() -> new AddressBookCustomException(INVALID_ID));
     }
 
